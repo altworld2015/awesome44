@@ -175,8 +175,8 @@ mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
 
     -- Each screen has its own tag table.
 --awful.tag({ 1, 2, 3, 4, 5 }, s, awful.layout.layouts[1])
-----local names = { "➀", "➁", "➂", "➃", "➄" }
-local names = { "⛪", "❡", "✉", "♫", "☘" }
+local names = {"  |", "  |", "  |", "  |", ""}
+-----local names = { "⛪", "❡", "✉", "♫", "☘" }
 --local names = { "Ƅ", "ƀ", "Ɵ", "ƈ", "Ɗ" }
 --local names = { "Ƅ", "Ɵ", "ƈ", "Ɗ" }
 local l = awful.layout.suit  -- Just to save some typing: use an alias.
@@ -573,17 +573,18 @@ local taglist_buttons = awful.util.table.join(
 --local t4 = awful.tag.find_by_name(awful.client.movetotag( "ƈ" ),"ƈ" )
 --local t5 = awful.tag.find_by_name(awful.client.movetotag( "Ɗ" ),"Ɗ" )
 -----local names = { "⛪", "❡", "☦", "♫", "☘" }
---local t1 = awful.tag.find_by_name(awful.client.movetotag( "➀" ),"➀" )  
---local t2 = awful.tag.find_by_name(awful.client.movetotag( "➁" ),"➁" )
---local t3 = awful.tag.find_by_name(awful.client.movetotag( "➂" ),"➂" )
---local t4 = awful.tag.find_by_name(awful.client.movetotag( "➃" ),"➃" )
---local t5 = awful.tag.find_by_name(awful.client.movetotag( "➄" ),"➄" )
+-----local names = {"  |", "  |", "  |", "  |", ""}
+local t1 = awful.tag.find_by_name(awful.client.movetotag( "  |" ),"  |" )  
+local t2 = awful.tag.find_by_name(awful.client.movetotag( "  |" ),"  |" )
+local t3 = awful.tag.find_by_name(awful.client.movetotag( "  |" ),"  |" )
+local t4 = awful.tag.find_by_name(awful.client.movetotag( "  |" ),"  |" )
+local t5 = awful.tag.find_by_name(awful.client.movetotag( "" ),"" )
 --
-local t1 = awful.tag.find_by_name(awful.client.movetotag( "⛪" ),"⛪" )  
-local t2 = awful.tag.find_by_name(awful.client.movetotag( "❡" ),"❡" )
-local t3 = awful.tag.find_by_name(awful.client.movetotag( "✉" ),"✉" )
-local t4 = awful.tag.find_by_name(awful.client.movetotag( "♫" ),"♫" )
-local t5 = awful.tag.find_by_name(awful.client.movetotag( "☘" ),"☘" )
+--local t1 = awful.tag.find_by_name(awful.client.movetotag( "⛪" ),"⛪" )  
+--local t2 = awful.tag.find_by_name(awful.client.movetotag( "❡" ),"❡" )
+--local t3 = awful.tag.find_by_name(awful.client.movetotag( "✉" ),"✉" )
+--local t4 = awful.tag.find_by_name(awful.client.movetotag( "♫" ),"♫" )
+--local t5 = awful.tag.find_by_name(awful.client.movetotag( "☘" ),"☘" )
 
 local t_menu ={ 
            {"____FIRST", function() awful.client.movetotag(t1) end },
@@ -915,12 +916,12 @@ clientkeys = awful.util.table.join(
         end ,
         {description = "minimize", group = "client"}),
     awful.key({ modkey, "Control"   }, "m",      
-        function ()
-            for _, c in ipairs(mouse.screen.selected_tag:clients()) do
-                 c.minimized = true
-            end
-        end,
-              {description = "close all windows in current tag", group = "client"}),
+        function()
+    for _, c in ipairs(mouse.screen.selected_tag:clients()) do
+        c.minimized = true
+    end
+end,
+              {description = "close all windows in current tag", group = "client"}),  
     awful.key({ modkey,           }, "m",
         function (c)
             c.maximized = not c.maximized
