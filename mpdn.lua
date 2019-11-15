@@ -88,7 +88,7 @@ function () awful.util.spawn_with_shell(ncmpcpp) end)))
 -------
 
 local desktop_wibox30 = wibox({ type = "desktop", visible = true, bg = "#00000000" })
-desktop_wibox30:geometry({ x = 706, y = 713, width = 10, height = 32 })
+desktop_wibox30:geometry({ x = 708, y = 713, width = 8, height = 32 })
 desktop_wibox30:set_widget(sep1)
 
 prev_icon = awful.widget.launchers({ name = "prev",
@@ -114,8 +114,8 @@ desktop_wibox31:geometry({ x = 794, y = 713, width = 10, height = 32 })
 desktop_wibox31:set_widget(sep)
 
 stop_icon:buttons(awful.util.table.join(
-    awful.button({ }, 1, function () stop_icon:set_image("/home/valera/.config/awesome/icons/mpd/mpd_pause.png") mpicon:set_image("/home/valera/.config/awesome/icons/14a.png") mpicon1:set_image("/home/valera/.config/awesome/icons/15a.png") mpicon3:set_image("/home/valera/.config/awesome/icons/16a.png") awful.util.spawn_with_shell("mpd & python3 ~/cavalcade/cavalcade/run.py") mpdwidget.update()  end),
-    awful.button({ }, 2, function () stop_icon:set_image("/home/valera/.config/awesome/icons/mpd/mpd_play.png") mpicon:set_image("/home/valera/.config/awesome/icons/14.png") mpicon1:set_image("/home/valera/.config/awesome/icons/15.png") mpicon3:set_image("/home/valera/.config/awesome/icons/16.png") awful.util.spawn_with_shell("killall mpd & killall python3 ~/cavalcade/cavalcade/run.py & killall cava") mpdwidget.update() end)
+    awful.button({ }, 1, function () stop_icon:set_image("/home/valera/.config/awesome/icons/mpd/mpd_pause.png") mpicon:set_image("/home/valera/.config/awesome/icons/14a.png") mpicon1:set_image("/home/valera/.config/awesome/icons/15a.png") mpicon3:set_image("/home/valera/.config/awesome/icons/16a.png") mpicon10:set_image("/home/valera/.config/awesome/appicons/3.png") mpicon100:set_image("/home/valera/.config/awesome/appicons/54a.png") awful.util.spawn_with_shell("mpd & python3 ~/cavalcade/cavalcade/run.py") mpdwidget.update()  end),
+    awful.button({ }, 2, function () stop_icon:set_image("/home/valera/.config/awesome/icons/mpd/mpd_play.png") mpicon:set_image("/home/valera/.config/awesome/icons/14.png") mpicon1:set_image("/home/valera/.config/awesome/icons/15.png") mpicon3:set_image("/home/valera/.config/awesome/icons/16.png") mpicon10:set_image("/home/valera/.config/awesome/appicons/3a.png") mpicon100:set_image("/home/valera/.config/awesome/appicons/54.png") awful.util.spawn_with_shell("killall mpd & killall python3 ~/cavalcade/cavalcade/run.py & killall cava") mpdwidget.update() end)
 ))
 --function stop_icon:fit(context, width, height) return width, height end
 local desktop_wibox15 = wibox({ type = "desktop", visible = true, bg = "#00000000" })
@@ -154,15 +154,29 @@ desktop_wibox19:set_widget(volume_master)
 --------
 
 local desktop_wibox34 = wibox({ type = "desktop", visible = true, bg = "#00000000" })
-desktop_wibox34:geometry({ x = 943, y = 713, width = 10, height = 32 })
+desktop_wibox34:geometry({ x = 943, y = 713, width = 8, height = 40 })
 desktop_wibox34:set_widget(sep2)
 ----------------------
 --------------
+mpicon10 = wibox.widget.imagebox()
+mpicon10.image = "/home/valera/.config/awesome/appicons/3a.png"
+
+local desktop_wibox34aa = wibox({ type = "desktop", visible = true, bg = "#00000000" })
+desktop_wibox34aa:geometry({ x = 647.4, y = 715.3, width = 16, height = 16 })
+desktop_wibox34aa:set_widget(mpicon10)
+
+mpicon100 = wibox.widget.imagebox()
+mpicon100.image = "/home/valera/.config/awesome/appicons/54.png"
+
+local desktop_wibox34aaa = wibox({ type = "desktop", visible = true, bg = "#00000000" })
+desktop_wibox34aaa:geometry({ x = 619.4, y = 681.3, width = 16, height = 16 })
+desktop_wibox34aaa:set_widget(mpicon100)
+
 mpicon1 = wibox.widget.imagebox()
 mpicon1.image = "/home/valera/.config/awesome/icons/15.png"
 
 local desktop_wibox34a = wibox({ type = "desktop", visible = true, bg = "#00000000" })
-desktop_wibox34a:geometry({ x = 710, y = 679, width = 46, height = 31 })
+desktop_wibox34a:geometry({ x = 710, y = 681, width = 46, height = 31 })
 desktop_wibox34a:set_widget(mpicon1)
 
 mpicon = wibox.widget.imagebox()
@@ -176,5 +190,5 @@ mpicon3 = wibox.widget.imagebox()
 mpicon3.image = "/home/valera/.config/awesome/icons/16.png"
 
 local desktop_wibox34c = wibox({ type = "desktop", visible = true, bg = "#00000000" })
-desktop_wibox34c:geometry({ x = 903,  y = 679, width = 46, height = 31 })
+desktop_wibox34c:geometry({ x = 903,  y = 681, width = 46, height = 31 })
 desktop_wibox34c:set_widget(mpicon3)
