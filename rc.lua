@@ -143,7 +143,7 @@ standart_menu = {
     { "FiReFox", "firefox", "/home/valera/.icons/Black Diamond-V2/scalable/apps/firefox.png" },
     { "TOR", "env GTK_THEME=Boje-Red /home/valera/tor/Browser/start-tor-browser --detach", "/home/valera/.icons/Black Diamond-V2/scalable/apps/epiphany-bookmarks.png" },
     { "Google-Earth", "google-earth", "/home/valera/.icons/Black Diamond-V2/scalable/apps/googleearth-icon.png" },
-    { "Aisleriot", "env GTK_THEME='EFDM-GG' sol", "/usr/share/icons/Black Diamond-V2/scalable/apps/gnome-aisleriot.png" },
+    { "Aisleriot", "env GTK_THEME='E5150-Red' sol", "/usr/share/icons/Black Diamond-V2/scalable/apps/gnome-aisleriot.png" },
     { "Opera", "opera --disable-seccomp-filter-sandbox", "/home/valera/.icons/opera.svg" },
    -- { "Aisleriot", "env GTK_THEME='Fire Red Theme' sol", "/usr/share/icons/Black Diamond-V2/scalable/apps/gnome-aisleriot.png" },
     { "XTERM", "xterm", "/home/valera/.icons/Black Diamond-V2/scalable/apps/xterm.png"  },
@@ -274,7 +274,7 @@ widget:set_align("center")
 --Sensors
 tempwidget = awful.widget.launcher({ name = "weather",
                                      image = "/home/valera/sharingan-icons-1.5/speedownload.png",
-                                     command = "/home/valera/gis-weather-0.8.4.1/weather"})
+                                     command = "gis-weather"})
 sensors = wibox.widget.textbox()
 vicious.register(sensors, vicious.widgets.thermal, "<span color=\"#e65117\"><span font=\"odstemplik Bold 14\"><b>$1°C</b></span></span>", 3, { "coretemp.0/hwmon/hwmon0", "core"} ,5)
 fixedwidget1 = wibox.layout.constraint(sensors, "exact", 32)
@@ -689,7 +689,36 @@ awful.screen.connect_for_each_screen(function(s)
 
     -- Create the wibox
     s.mywibox = awful.wibar({ position = "top", screen = s, height = 18 })
-
+ -------------
+ -- autohide panel
+s.wibox_plug = awful.wibar({ position = "top",
+                             height = 1,
+                             opacity = 0,
+                             visible = false,
+                             screen = s })
+local function make_panel_visible()
+    s.mywibox.visible = true
+    s.wibox_plug.visible = false
+end
+local function make_panel_hidden()
+    s.mywibox.visible = false
+    s.wibox_plug.visible = true
+end
+local function panel_autohide(focused_client)
+    if focused_client.class == 'Opera'
+            and focused_client:isvisible() then
+        make_panel_hidden()
+        s.mywibox:connect_signal("mouse::leave", make_panel_hidden)
+        s.wibox_plug:connect_signal("mouse::enter", make_panel_visible)
+    else
+        make_panel_visible()
+        s.mywibox:disconnect_signal("mouse::leave", make_panel_hidden)
+        s.wibox_plug:disconnect_signal("mouse::enter", make_panel_visible)
+    end
+end
+client.connect_signal("focus", panel_autohide)
+client.connect_signal("unfocus", panel_autohide)
+---------------------
     -- Add widgets to the wibox
     s.mywibox:setup {
         layout = wibox.layout.align.horizontal,
@@ -1257,10 +1286,11 @@ awful.util.spawn_with_shell("run_once kbdd")
 --awful.util.spawn_with_shell("run_once start-pulseaudio-x11")
 --awful.util.spawn_with_shell("run_once /usr/bin/synclient TouchpadOff=1")
 --awful.util.spawn_with_shell (awful.tag.incncol( 4, nil, true))
-awful.util.spawn_with_shell("run_once /home/valera/gis-weather-0.8.4.1/weather")
+--awful.util.spawn_with_shell("run_once /home/valera/gis-weather-0.8.4.1/weather")
+awful.util.spawn_with_shell("run_once gis-weather")
 ----awful.util.spawn_with_shell("run_once connman-gtk")
 --awful.util.spawn_with_shell("run_once nm-applet")
 awful.util.spawn_with_shell("setxkbmap")
 ----awful.util.spawn_with_shell("sleep 2 && /home/valera/.config/awesome/themes/colored/scripts/startup-sound.sh")
-awful.util.spawn_with_shell("/usr/lib/kdeconnectd")
+--awful.util.spawn_with_shell("/usr/lib/kdeconnectd")
 --awful.util.spawn_with_shell("/usr/lib/xfce4/notifyd/xfce4-notifyd")
