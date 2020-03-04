@@ -82,8 +82,9 @@ end)
 local notification
 function show_MPD_status()
     spawn.easy_async(GET_MPD_CMD,
-        function(stdout, _, _, _)
-            notification = naughty.notify {
+        --awful.mouse.snap (w, snap, x, y, fixed_x, fixed_y),
+        function(stdout, _, _, _)           
+           notification = naughty.notify {
                 text = stdout,
                 font = "Z003 14",
                 title = "MPD",
@@ -94,7 +95,7 @@ function show_MPD_status()
         end)
 end
 
-mpdarc:connect_signal("mouse::enter", function() show_MPD_status() end)
+mpdarc:connect_signal("mouse::enter", function() show_MPD_status()  end)
 mpdarc:connect_signal("mouse::leave", function() naughty.destroy(notification) end)
 
 watch(GET_MPD_CMD, 1, update_graphic, mpdarc)

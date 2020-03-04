@@ -32,6 +32,7 @@ local ramgraph_widget = require("ram-widget")
 local watch = require("awful.widget.watch")
 mpdarc = require("mpdarc")
 
+
 ----awful.util.spawn_with_shell("sleep 14 && xcompmgr -cCfF -r7 -o.65 -l-10 -t-8 -D7 &")
 awful.util.spawn_with_shell("xcompmgr -cCfF &")
 --awful.util.spawn_with_shell("sleep 7 && killall xcompmgr &")
@@ -319,11 +320,11 @@ sensors1:set_widget(sensors)
 --------------
 ----------------
 
---memicon = wibox.widget.imagebox()
---memicon.image = "/home/valera/.icons/Black Diamond-V2/scalable/apps/gnome-system-monitor.png"
-memicon = awful.widget.launchers({ name = "prev",
-                                     image = "/home/valera/.config/awesome/appicons/xfce4-terminal.png",
-                                     command = "xfce4-terminal -e htop"})
+memicon = wibox.widget.imagebox()
+memicon.image = "/home/valera/.icons/Black Diamond-V2/scalable/apps/gnome-system-monitor.png"
+--memicon = awful.widget.launchers({ name = "prev",
+--                                     image = "/home/valera/.config/awesome/appicons/xfce4-terminal.png",
+--                                     command = "xfce4-terminal -e htop"})
 
 -- Memory
 memwidget = wibox.widget.textbox()
@@ -390,7 +391,11 @@ watch('bash -c "free | grep -z Mem.*Swap.*"', 1,
 memicon:buttons(
     awful.util.table.join(
         awful.button({}, 1, function()
-            awful.placement.top_right(w, { margins = {top = 25, right = 168}})
+        --x = mouse.coords().x
+        ---y = mouse.coords().y
+           --awful.placement.top_right(w, { margins = {top = 25, right = 168}})
+           awful.placement.under_mouse(w, { margins = {top = 200, right = 0}})
+           --awful.placement.next_to_mouse(w, { margins = {top = 600, right = 200}})
             w.pie.data_list = {
                 {'used ' .. getPercentage(used + used_swap), used + used_swap},
                 {'free ' .. getPercentage(free + free_swap), free + free_swap},
@@ -402,6 +407,7 @@ memicon:buttons(
     )
 )
 -----------------
+
 
 volicon = awful.widget.launchers({ name = "pavucontrol",
                                      image = "/home/valera/.config/awesome/appicons/armagetronad.png",
@@ -424,7 +430,7 @@ pacwidget_t = awful.tooltip({ objects = { pacwidget},})
 vicious.register(pacwidget, vicious.widgets.pkg,
                 function(widget,args)
                     local io = { popen = io.popen }
-                    local s = io.popen("pacman -Qu -b /tmp/checkup-db-valera")
+                    local s = io.popen("pacman -Qu -b /tmp/checkup-db-1000")
                     --local s = io.popen("/usr/bin/checkupdates")
                     local str = ''
 		    local i = 0
@@ -459,6 +465,7 @@ spr = wibox.widget.imagebox()
 spr.image = "/home/valera/.config/awesome/icons/mpd/separators/spr.png"
 spr5px = wibox.widget.imagebox()
 spr5px.image = "/home/valera/.config/awesome/icons/mpd/separators/spr5px.png"
+
 
 -- Create a laucher widget
 --myapp1start = awful.widget.launcher({ name = "firefox",
@@ -705,7 +712,7 @@ local function make_panel_hidden()
     s.wibox_plug.visible = true
 end
 local function panel_autohide(focused_client)
-    if focused_client.class == 'Opera'
+    if focused_client.class == 'Google-chrome'
             and focused_client:isvisible() then
         make_panel_hidden()
         s.mywibox:connect_signal("mouse::leave", make_panel_hidden)
@@ -842,7 +849,10 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "w", function () mymainmenu:show() end,
               {description = "show main menu", group = "awesome"}),
 
+
+           
     -- Layout manipulation
+   
     awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end,
               {description = "swap with next client by index", group = "client"}),
     awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx( -1)    end,
@@ -863,6 +873,7 @@ globalkeys = awful.util.table.join(
         {description = "go back", group = "client"}),
 
     -- Standard program
+     
     awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end,
               {description = "open a terminal", group = "launcher"}),
     awful.key({ modkey, "Shift" }, "r", awesome.restart,
