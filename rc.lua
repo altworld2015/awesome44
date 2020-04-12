@@ -712,7 +712,7 @@ local function make_panel_hidden()
     s.wibox_plug.visible = true
 end
 local function panel_autohide(focused_client)
-    if focused_client.class == 'Google-chrome'
+    if focused_client.class == 'google-chrome'
             and focused_client:isvisible() then
         make_panel_hidden()
         s.mywibox:connect_signal("mouse::leave", make_panel_hidden)
