@@ -25,7 +25,7 @@ local APW = require("apw/widget")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
 --local radical = require("radical")
 --require("collision")()
-local desktop_iconsx = require("desktop_iconsx")
+local desktop_iconsx2 = require("desktop_iconsx2")
 local mpdn = require("mpdn")
 require("mic")
 local ramgraph_widget = require("ram-widget") 
@@ -393,8 +393,8 @@ memicon:buttons(
         awful.button({}, 1, function()
         --x = mouse.coords().x
         ---y = mouse.coords().y
-           --awful.placement.top_right(w, { margins = {top = 25, right = 168}})
-           awful.placement.under_mouse(w, { margins = {top = 200, right = 0}})
+           awful.placement.top_right(w, { margins = {top = 25, right = 168}})
+           --awful.placement.under_mouse(w, { margins = {top = 200, right = 0}})
            --awful.placement.next_to_mouse(w, { margins = {top = 600, right = 200}})
             w.pie.data_list = {
                 {'used ' .. getPercentage(used + used_swap), used + used_swap},
@@ -834,6 +834,7 @@ globalkeys = awful.util.table.join(
     --awful.key({ }, "F2", function () scratch.drop("opera", c, nil, nil, 1.00, 0.90) end),
     awful.key({ }, "F2", function () awful.spawn("dbus-launch /home/valera/.x") end),
     --awful.key({ }, "F3", function () awful.spawn("thunar") end),
+    awful.key({ }, "XF86Mail", function () awful.spawn("thunderbird") end),
     awful.key({ modkey,           }, "j",
         function ()
             awful.client.focus.byidx( 1)
@@ -852,7 +853,7 @@ globalkeys = awful.util.table.join(
 
            
     -- Layout manipulation
-   
+
     awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end,
               {description = "swap with next client by index", group = "client"}),
     awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx( -1)    end,
@@ -873,7 +874,7 @@ globalkeys = awful.util.table.join(
         {description = "go back", group = "client"}),
 
     -- Standard program
-     
+
     awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end,
               {description = "open a terminal", group = "launcher"}),
     awful.key({ modkey, "Shift" }, "r", awesome.restart,
@@ -908,7 +909,27 @@ globalkeys = awful.util.table.join(
                   end
               end,
               {description = "restore minimized", group = "client"}),
-
+     
+     ----MUTE
+     awful.key({}, "XF86AudioRaiseVolume",
+function()
+os.execute("amixer -D pulse sset Master 5%+")
+end
+),
+awful.key({}, "XF86AudioLowerVolume",
+function()
+os.execute("amixer -D pulse sset Master 5%-")
+end
+),
+awful.key({}, "XF86AudioMute",
+function()
+os.execute("amixer -D pulse sset Master toggle")
+end
+),
+awful.key({  },            "XF86AudioPrev",     function () awful.util.spawn_with_shell("mpc prev || ncmpcpp prev") end),
+        awful.key({  },            "XF86AudioStop",     function () stop_icon:set_image("/home/valera/.config/awesome/icons/mpd/mpd_play.png") mpicon:set_image("/home/valera/.config/awesome/icons/14.png") mpicon1:set_image("/home/valera/.config/awesome/icons/15.png") mpicon3:set_image("/home/valera/.config/awesome/icons/16.png") mpicon10:set_image("/home/valera/.config/awesome/appicons/3a.png") mpicon100:set_image("/home/valera/.config/awesome/appicons/54.png") mpicon110:set_image("/home/valera/.config/awesome/appicons/1s.png") awful.util.spawn_with_shell("killall mpd & killall python3 ~/cavalcade/cavalcade/run.py & killall cava") mpdwidget.update() end),
+        awful.key({  },            "XF86AudioPlay",     function () stop_icon:set_image("/home/valera/.config/awesome/icons/mpd/mpd_pause.png") mpicon:set_image("/home/valera/.config/awesome/icons/14a.png") mpicon1:set_image("/home/valera/.config/awesome/icons/15a.png") mpicon3:set_image("/home/valera/.config/awesome/icons/16a.png") mpicon10:set_image("/home/valera/.config/awesome/appicons/3.png") mpicon100:set_image("/home/valera/.config/awesome/appicons/54a.png") mpicon110:set_image("/home/valera/.config/awesome/appicons/1sa.png") awful.util.spawn_with_shell("mpd & python3 ~/cavalcade/cavalcade/run.py") mpdwidget.update()  end),
+        awful.key({  },            "XF86AudioNext",     function () awful.util.spawn_with_shell("mpc next || ncmpcpp next") end),
 
     -- Prompt
     awful.key({  },            "Menu",     function () awful.screen.focused().mypromptbox:run() end,
@@ -968,6 +989,8 @@ end,
             c:raise()
         end ,
         {description = "maximize", group = "client"}),
+        
+    
     awful.key({ modkey, "Control" }, "m",
         function (c)
             c.maximized_vertical = not c.maximized_vertical

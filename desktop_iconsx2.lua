@@ -82,7 +82,8 @@ desktop_wibox4:set_widget(my_widget4)
 -----------
 my_widget5 = awful.widget.launchers({ name = "desktop",
                                      image = "/home/valera/.config/awesome/appicons/gnome-fs-desktop.png",
-                                     command = "pcmanfm && sleep 3 && xdotool key F3"
+                                     --command = "pcmanfm && sleep 3 && xdotool key F3"
+                                     command = "google-earth-pro"
                                      })
 function my_widget5:fit(context, width, height) return width, height end
 local desktop_wibox5 = wibox({ type = "desktop", visible = true, bg = "#00000000" })

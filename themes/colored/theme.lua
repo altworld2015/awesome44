@@ -1,4 +1,4 @@
-------------------------------------------------
+ ------------------------------------------------
 --         Full Color Awesome Theme           --    
 --          by TheImmortalPhoenix             --
 -- http://theimmortalphoenix.deviantart.com/  --
