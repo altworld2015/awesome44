@@ -1057,7 +1057,8 @@ end
 
 clientbuttons = awful.util.table.join(
     awful.button({ }, 1, function (c) client.focus = c; c:raise() end),
-    awful.button({  }, 8, awful.mouse.client.move),
+    --awful.button({  }, 8, awful.mouse.client.move),
+    awful.button({ modkey }, 1, awful.mouse.client.move),
    -- awful.button({ }, 9, function () awful.menu(move_menu):toggle() end),
     awful.button({ }, 9, function () awful.util.spawn_with_shell("xdotool key ctrl+alt+e" ) end),
     awful.button({ modkey }, 3, awful.mouse.client.resize))
