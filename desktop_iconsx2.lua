@@ -81,7 +81,8 @@ desktop_wibox4:set_widget(my_widget4)
 -----------
 -----------
 my_widget5 = awful.widget.launchers({ name = "desktop",
-                                     image = "/home/valera/.config/awesome/appicons/gnome-fs-desktop.png",
+                                     image = "/home/valera/.config/awesome/appicons/googleearth.png",
+                                     --image = "/home/valera/.config/awesome/appicons/gnome-fs-desktop.png",
                                      --command = "pcmanfm && sleep 3 && xdotool key F3"
                                      command = "google-earth-pro"
                                      })
@@ -91,10 +92,10 @@ desktop_wibox5:geometry({ x = 50, y = 290, width = 32, height = 32 })
 desktop_wibox5:set_widget(my_widget5)
 --
 local my_widget6 = wibox.widget.textbox()
-my_widget6.markup = "<span color=\"#e74f12\"><span font=\"odstemplik 15\"><b>Home</b></span></span>"
+my_widget6.markup = "<span color=\"#e74f12\"><span font=\"odstemplik 15\"><b>GoogleEarth</b></span></span>"
 function my_widget6:fit(context, width, height) return width, height end
 local desktop_wibox6 = wibox({ type = "desktop", visible = true, bg = "#00000000" })
-desktop_wibox6:geometry({ x = 44, y = 330, width = 50, height = 18 })
+desktop_wibox6:geometry({ x = 28, y = 330, width = 100, height = 18 })
 desktop_wibox6:set_widget(my_widget6)
 
 

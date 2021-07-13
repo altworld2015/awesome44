@@ -68,6 +68,7 @@ end
 -- Themes define colours, icons, font and wallpapers.
 --beautiful.init(awful.util.get_themes_dir() .. "default/theme.lua")
 beautiful.init("/home/valera/.config/awesome/themes/colored/theme.lua")
+
 --scripts_dir = "/home/valera/.config/awesome/themes/colored/scripts"
 -- This is used later as the default terminal and editor to run.
 terminal = "xfce4-terminal"
@@ -129,7 +130,7 @@ myawesomemenu = {
    { "manual", "xterm -e man awesome", "/home/valera/.icons/Black Diamond-V2/scalable/places/folder-documents.png"},   
   -- { "edit config", editor_cmd .. " " .. awesome.conffile, "/home/valera/.icons/Black Diamond-V2/scalable/emblems/emblem-xxs.png"},
    { "edit config", "leafpad /home/valera/.config/awesome/rc.lua", "/home/valera/.icons/Black Diamond-V2/scalable/emblems/emblem-xxs.png"},
-   { "edit desktop_i", "leafpad /home/valera/.config/awesome/desktop_iconsx.lua", "/home/valera/.config/awesome/appicons/desktop.png"},
+   { "edit desktop_i", "leafpad /home/valera/.config/awesome/desktop_iconsx2.lua", "/home/valera/.config/awesome/appicons/desktop.png"},
    { "restart", awesome.restart, "/home/valera/sharingan-icons-1.5/clamtk.png"},
    { "quit", function() awesome.quit() end, "/home/valera/sharingan-icons-1.5/Curtains.png"}
 }
@@ -519,7 +520,6 @@ space1 = wibox.widget.textbox()
 space1.text = "  "
 
 -----------
------------
 
 -----------
 ----------
@@ -811,6 +811,7 @@ end)
 -- {{{ Mouse bindings
 root.buttons(awful.util.table.join(
     awful.button({ }, 3, function () mymainmenu:toggle() end),
+    --awful.button({ }, 2, function () awful.util.spawn_with_shell("xdotool key Ctrl+Alt+e") end),
     awful.button({ }, 4, awful.tag.viewnext),
     awful.button({ }, 5, awful.tag.viewprev)
 ))
@@ -1216,8 +1217,8 @@ awful.rules.rules = {
       properties = { floating = true } },
      {rule = {class = "Skype"},
       properties = {floating = true} },
-       {rule = {class = "Gmlive"},
-      properties = {floating = true} },
+       {rule = {class = "astroncia_iptv.py"},
+      properties = {floating = true, offfocus = false } },
 
      { rule = { class = "Pavucontrol" },
       properties = { floating = true } },
